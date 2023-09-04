@@ -41,4 +41,17 @@ This section's linear regression section formatting was inspired by Week 5, Day 
     plt.annotate(line_eq,(-55,10),color="red")
     plt.annotate(f'r = {rvalue}',(-55,5),color="r")
 
-    
+
+VacationPY:
+
+--------------------------------------------------
+Setup
+--------------------------------------------------
+
+This setup section was provided in the starter code
+
+--------------------------------------------------
+Setup
+--------------------------------------------------
+
+This setup section was provided in the starter code
