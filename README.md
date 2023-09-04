@@ -24,8 +24,10 @@ This setup section's formatting to pull and store data from the API
 
 This section's read/write CSV file code as it was provided in starter code.
 
+This section's layout for plotting and saving figures was used.
+
 --------------------------------------------------
 Requirement 2
 --------------------------------------------------
-# This setup section's formatting to pull and store data from the API
-#    Subsection "Use the OpenWeatherMap API to retrieve weather data from the cities list generated"
+
+This section's linear regression section formatting was inspired by Week 5, Day 3, Activity 8
