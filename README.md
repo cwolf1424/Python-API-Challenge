@@ -31,3 +31,14 @@ Requirement 2
 --------------------------------------------------
 
 This section's linear regression section formatting was inspired by Week 5, Day 3, Activity 8
+    # Linear regression
+    (slope, intercept, rvalue, pvalue, stderr) = linregress(x_values, y_values)
+    regress_values = x_values * slope + intercept
+    plt.plot(x_values, regress_values, "r")
+
+    # Annotate
+    line_eq = "y = " + str(round(slope,2)) + "x + " + str(round(intercept,2))
+    plt.annotate(line_eq,(-55,10),color="red")
+    plt.annotate(f'r = {rvalue}',(-55,5),color="r")
+
+    
