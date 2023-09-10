@@ -45,6 +45,7 @@ to teach latitude and longitude combination was provided.
 --------------------------------------------------
 Requirement 1
 --------------------------------------------------
+
 This section's read/write CSV file code as it was provided in starter code.
 
     # Export the City_Data into a csv
@@ -152,4 +153,79 @@ VacationPY (Incomplete):
 Setup
 --------------------------------------------------
 
-This setup section was provided in the starter code
+This setup section was provided in the starter code:
+
+    # Load the CSV file created in Part 1 into a Pandas DataFrame
+    city_data_df = pd.read_csv("output_data/cities.csv")
+
+    #Convert Max Temp to Celcius
+    city_data_df["Max Temp"] = (city_data_df["Max Temp"]-273.15)
+
+    # Display sample data
+    city_data_df.head()
+
+--------------------------------------------------
+Step 3
+--------------------------------------------------
+
+Professor Benjamin Alford helped with the following in class as .append is no longer supported:
+
+    pd.concat([hotel_df,hotel_names_df],ignore_index=True)
+
+--------------------------------------------------
+Step 4
+--------------------------------------------------
+
+The outline and some content of this section was provided in the starter code and then I used Week 6, Day 3 Activity 04-Ins_Nearest-Resturaunts for the params section:
+
+    # Set parameters to search for a hotel
+    limit = 1
+    radius = 10000 
+
+    lat = 0
+    lng = 0
+    params ={}
+
+    # Print a message to follow up the hotel search
+    print("Starting hotel search")
+
+    # Iterate through the hotel_df DataFrame
+    for index, row in hotel_df.iterrows():
+        # get latitude, longitude from the DataFrame
+        lat = row ["Lat"]
+        lng = row ["Lng"]
+
+        filters = f"circle:{lng},{lat},{radius}"
+        bias = f"proximity:{lng},{lat}"
+        category ="accommodation.hotel"
+
+        # Add filter and bias parameters with the current city's latitude and longitude to the params dictionary
+        params ["filter"] = filters
+        params ["bias"] = bias
+        params ["limit"] = limit
+        params ["categories"] = category
+        params ["apiKey"] = geoapify_key
+        
+        # Set base URL
+        base_url = "https://api.geoapify.com/v2/places"
+
+
+        # Make and API request using the params dictionaty
+        name_address = requests.get(base_url, params=params)
+
+        # Convert the API response to JSON format
+        name_address = name_address.json()
+        
+        # Grab the first hotel from the results and store the name in the hotel_df DataFrame
+        try:
+            hotel_df.loc[index, "Hotel Name"] = name_address["features"][0]["properties"]["name"]
+        except:
+            # If no hotel is found, set the hotel name as "No hotel found".
+            hotel_df.loc[index, "Hotel Name"] = "No hotel found"
+            
+        # Log the search results
+        print(f"{hotel_df.loc[index, 'City']} - nearest hotel: {hotel_df.loc[index, 'Hotel Name']}")
+
+    # Display sample data
+    hotel_df
+
